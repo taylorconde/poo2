@@ -1,15 +1,18 @@
 package tech.pinho.banco;
 
+import tech.pinho.banco.model.Account;
+import tech.pinho.banco.repository.AccountRepository;
+import tech.pinho.banco.repository.Repository;
+import tech.pinho.banco.service.OpenAccountService;
+import tech.pinho.banco.service.OpenAccountServiceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        double asd = 0.1;
-        double asd2 = 0.2;
-        System.out.println(asd+asd2);
-        if((asd+asd2) == 0.3) {
-            System.out.println("Claro que é");
-        } else {
-            System.out.println("Não é possível!");
-        }
+        Repository<Account, Integer> accountIntegerRepository = new AccountRepository();
+        OpenAccountService openAccountService = new OpenAccountServiceImpl(accountIntegerRepository);
     }
 }

@@ -1,4 +1,6 @@
 package tech.pinho.banco.model;
 
-public class AccountStatus {
+public enum AccountStatus {
+
+    OPEN,
 }
