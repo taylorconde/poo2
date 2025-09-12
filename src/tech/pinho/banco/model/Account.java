@@ -68,4 +68,16 @@ public class Account {
     public void setEntries(List<AccountEntry> entries) {
         this.entries = entries;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "status=" + status +
+                ", type=" + type +
+                ", agency=" + agency +
+                ", owner=" + owner +
+                ", balance=" + balance +
+                ", number=" + number +
+                '}';
+    }
 }
