@@ -1,7 +1,7 @@
 package tech.pinho.banco;
 
-import tech.pinho.banco.controller.ContaController;
-import tech.pinho.banco.controller.ContaControllerImpl;
+import tech.pinho.banco.controller.CreateAccountController;
+import tech.pinho.banco.controller.CreateAccountControllerImpl;
 import tech.pinho.banco.controller.MenuController;
 import tech.pinho.banco.controller.MenuControllerImpl;
 import tech.pinho.banco.model.Account;
@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Repository<Account, Integer> accountIntegerRepository = new AccountRepository();
         OpenAccountService openAccountService = new OpenAccountServiceImpl(accountIntegerRepository);
-        ContaController contaController = new ContaControllerImpl(openAccountService);
+        CreateAccountController createAccountController = new CreateAccountControllerImpl(openAccountService);
         MenuController menuController = new MenuControllerImpl();
         while (true) {
             menuController.exibir();

@@ -2,7 +2,7 @@ package tech.pinho.banco.controller;
 
 import tech.pinho.banco.model.Account;
 
-public interface ContaController {
+public interface CreateAccountController {
 
-    Account createAccount();
+    void execute();
 }

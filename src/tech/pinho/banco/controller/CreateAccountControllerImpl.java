@@ -7,16 +7,16 @@ import tech.pinho.banco.service.OpenAccountService;
 
 import java.util.Scanner;
 
-public class ContaControllerImpl implements ContaController {
+public class CreateAccountControllerImpl implements CreateAccountController, MenuAction {
 
     private final OpenAccountService openAccountService;
 
-    public ContaControllerImpl(OpenAccountService openAccountService) {
+    public CreateAccountControllerImpl(OpenAccountService openAccountService) {
         this.openAccountService = openAccountService;
     }
 
     @Override
-    public Account createAccount() {
+    public void execute() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Digite o nome do usuário");
         String nome = sc.nextLine();
@@ -31,6 +31,10 @@ public class ContaControllerImpl implements ContaController {
         Account account = openAccountService.execute(owner, AccountType.CONTA_CORRENTE);
 
         System.out.println("A conta " + account + " foi criada com sucesso!");
-        return account;
+    }
+
+    @Override
+    public String getTitle() {
+        return "Abrir Conta";
     }
 }
