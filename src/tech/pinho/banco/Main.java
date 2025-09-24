@@ -1,13 +1,8 @@
 package tech.pinho.banco;
 
 import tech.pinho.banco.controller.*;
-import tech.pinho.banco.model.Account;
 import tech.pinho.banco.repository.AccountRepository;
-import tech.pinho.banco.repository.Repository;
-import tech.pinho.banco.service.GenerateTransactionService;
-import tech.pinho.banco.service.OpenAccountService;
-import tech.pinho.banco.service.OpenAccountServiceImpl;
-import tech.pinho.banco.service.WithdrawalGenerateTransactionServiceImpl;
+import tech.pinho.banco.service.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +13,7 @@ public class Main {
     public static final AccountRepository accountRepository2;
 
     public static final OpenAccountService openAccountService;
+    public static final CreateOwnerService createOwnerService;
     public static final GenerateTransactionService withdrawalGenerateTransactionService;
     public static final MenuAction createAccountController;
     public static final MenuAction withdrawalController;
@@ -28,8 +24,9 @@ public class Main {
         accountRepository = AccountRepository.getInstance();
         accountRepository2 = AccountRepository.getInstance();
         openAccountService = new OpenAccountServiceImpl(accountRepository);
+        createOwnerService = new CreateOwnerServiceImpl();
         withdrawalGenerateTransactionService = new WithdrawalGenerateTransactionServiceImpl(accountRepository2);
-        createAccountController = new CreateAccountControllerImpl(openAccountService);
+        createAccountController = new CreateAccountControllerImpl(openAccountService, createOwnerService);
         withdrawalController = new WithdrawalControllerImpl((WithdrawalGenerateTransactionServiceImpl) withdrawalGenerateTransactionService);
 
         actions = new HashMap<>();
