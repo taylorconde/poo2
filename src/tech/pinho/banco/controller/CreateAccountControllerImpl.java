@@ -3,16 +3,23 @@ package tech.pinho.banco.controller;
 import tech.pinho.banco.model.Account;
 import tech.pinho.banco.model.AccountType;
 import tech.pinho.banco.model.Owner;
+import tech.pinho.banco.service.CreateOwnerService;
 import tech.pinho.banco.service.OpenAccountService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class CreateAccountControllerImpl implements CreateAccountController, MenuAction {
 
     private final OpenAccountService openAccountService;
+    private final CreateOwnerService createOwnerService;
 
-    public CreateAccountControllerImpl(OpenAccountService openAccountService) {
+    public CreateAccountControllerImpl(OpenAccountService openAccountService, CreateOwnerService createOwnerService) {
         this.openAccountService = openAccountService;
+        this.createOwnerService = createOwnerService;
     }
 
     @Override
@@ -24,9 +31,18 @@ public class CreateAccountControllerImpl implements CreateAccountController, Men
         System.out.print("Digite o CPF do usuário");
         String cpf = sc.nextLine();
 
-        Owner owner = new Owner();
-        owner.setCpf(cpf);
-        owner.setNome(nome);
+        LocalDate nascimento = null;
+        do {
+            try {
+                System.out.print("Digite a data de nascimento(Ex.: 2025-09-24 )");
+                String data = sc.nextLine();
+                nascimento = LocalDate.parse(data);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formato inválido de data. Siga o exemplo (Ex.: 2025-09-24 )");
+            }
+        } while (nascimento == null);
+
+        Owner owner = createOwnerService.execute(nome, cpf, nascimento);
 
         Account account = openAccountService.execute(owner, AccountType.CONTA_CORRENTE);
 

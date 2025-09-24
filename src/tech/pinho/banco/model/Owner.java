@@ -1,9 +1,20 @@
 package tech.pinho.banco.model;
 
+import java.time.LocalDate;
+
 public class Owner {
 
     private String cpf;
     private String nome;
+    private LocalDate dataNascimento;
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
 
     public String getCpf() {
         return cpf;

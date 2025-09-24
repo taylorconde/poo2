@@ -8,6 +8,18 @@ import java.util.List;
 public class AccountRepository implements Repository<Account, Integer> {
 
     private List<Account> accounts = new ArrayList<>();
+    private static AccountRepository instance;
+
+    private AccountRepository() {
+
+    }
+
+    public static AccountRepository getInstance() {
+        if (instance == null) {
+            instance = new AccountRepository();
+        }
+        return instance;
+    }
 
     @Override
     public Account save(Account account) {
